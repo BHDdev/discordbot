@@ -7,6 +7,7 @@ import re
 import os
 
 dotenv.load_dotenv()
+PINUP_ROLL_ID = 1306182463508451339
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=(), description="Community made BHD discord bot. Licensed under the AGPL.", intents=intents, help_command=None)
@@ -41,11 +42,19 @@ async def on_reaction_add(reaction: discord.Reaction, user: discord.User):
                 print("Unpinning message")
                 await reaction.message.unpin()
 
+    if any(role.id == PINUP_ROLL_ID for role in user.roles):
+        if reaction.emoji == "📌":
+            print("Pinning message")
+            await reaction.message.pin()
+        elif reaction.emoji == "📍":
+            print("Unpinning message")
+            await reaction.message.unpin()
+
 # Cat gifs (very important XD)
 class CatGifView(discord.ui.View):
     @discord.ui.button(label="Delete", style=discord.ButtonStyle.danger)
     async def delete_button(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message("Deleting...", ephemeral=True)
+        await interaction.response.send_message("Deleting...", ephemeral=True, delete_after=2)
         await interaction.message.delete()
 
 @bot.event
@@ -103,6 +112,7 @@ async def help(interaction: discord.Interaction):
     embed.add_field(name="ping", value="Pong!", inline=False)
     embed.add_field(name="update", value="Update the bot", inline=False)
     embed.add_field(name="imhelp", value="Info to ims", inline=False)
+    embed.add_field(name="Reaction commands", value="📌 Pin message\n📍 Unpin message\n🔒 Lock thread\n🔓 Unlock thread", inline=False)
     
     await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
 
@@ -154,6 +164,25 @@ class ImHelpView(discord.ui.View):
             embed.description = self.data[value]["description"]
             embed.set_image(url=self.data[value]["image"])
             await interaction.followup.send(embed=embed, view=view)
+
+    # Handler for embedding/previewing discord links in messages
+    @bot.event
+    async def on_message(message: discord.Message):
+        if message.author.bot:
+            return
+        if "discord.com/channels" in message.content:
+            match = re.search(r"discord.com/channels/(\d+)/(\d+)/(\d+)", message.content)
+            message_id = match.group(3)
+            channel_id = match.group(2)
+            channel = bot.get_channel(int(channel_id))
+            if channel:
+                foundmessage = await channel.fetch_message(int(message_id))
+                if foundmessage:
+                    embed = discord.Embed(description=foundmessage.content, color=discord.Color.blurple())
+                    embed.set_author(name=foundmessage.author.name, icon_url=foundmessage.author.avatar)
+                    embed.timestamp = foundmessage.created_at
+                    await message.reply(embed=embed, mention_author=False)
+
 
 @bot.tree.command(name="imhelp")
 async def imhelp(interaction: discord.Interaction):
