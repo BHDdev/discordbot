@@ -50,6 +50,13 @@ async def on_reaction_add(reaction: discord.Reaction, user: discord.User):
             print("Unpinning message")
             await reaction.message.unpin()
 
+# Welcome message
+@bot.event
+async def on_member_join(member: discord.Member):
+    channel = member.guild.system_channel
+    if channel:
+        await channel.send(f"Ahh {member.mention}, we have been expecting you...")
+
 # Cat gifs (very important XD)
 class CatGifView(discord.ui.View):
     @discord.ui.button(label="Delete", style=discord.ButtonStyle.danger)
