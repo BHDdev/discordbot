@@ -5,6 +5,7 @@ import requests
 import dotenv
 import re
 import os
+from data import implantData
 
 dotenv.load_dotenv()
 PINUP_ROLL_ID = 896578804649173002
@@ -125,51 +126,26 @@ async def help(interaction: discord.Interaction):
 
 # Im help
 class ImHelpView(discord.ui.View):
-    data = {
-        "Strawberry": {
-            "description": "Strawberry is a popular flavor!",
-            "image": "https://unsplash.it/200/200",
-            "url": "https://example.com"
-        },
-        "Chocolate": {
-            "description": "Chocolate is a classic flavor!",
-            "image": "https://unsplash.it/200/200",
-            "url": "https://example.com"
-        },
-        "Vanilla": {
-            "description": "Vanilla is a simple flavor!",
-            "image": "https://unsplash.it/200/200",
-            "url": "https://example.com"
-        }
-    }
-
+    def generate_options():
+        options = []
+        for key in implantData:
+            options.append(discord.SelectOption(label=key, description=f"Pick this for more information on {key}"))
+        return options
+    
     @discord.ui.select(
-        placeholder = "Choose a Flavor!",
+        placeholder = "Select implants youd like to view",
         min_values = 1,
-        max_values= 3,
-        options = [
-            discord.SelectOption(
-                label="Vanilla",
-                description="Pick this if you like vanilla!"
-            ),
-            discord.SelectOption(
-                label="Chocolate",
-                description="Pick this if you like chocolate!"
-            ),
-            discord.SelectOption(
-                label="Strawberry",
-                description="Pick this if you like strawberry!"
-            )
-        ]
+        max_values= len(generate_options()),
+        options = generate_options()
     )
     async def select_callback(self, interaction: discord.Interaction, select: discord.ui.select):
         await interaction.response.send_message(f"Loading selected...", ephemeral=True, delete_after=1)
         for value in select.values:
             view = discord.ui.View()
-            view.add_item(discord.ui.Button(label="More", url=self.data[value]["url"], style=discord.ButtonStyle.link))
-            embed = discord.Embed(title=value, color=discord.Color.blue())
-            embed.description = self.data[value]["description"]
-            embed.set_image(url=self.data[value]["image"])
+            view.add_item(discord.ui.Button(label="More", url=implantData[value]["url"], style=discord.ButtonStyle.link))
+            embed = discord.Embed(title=value, color=discord.Color.blurple())
+            embed.description = implantData[value]["description"]
+            embed.set_image(url=implantData[value]["image"])
             await interaction.followup.send(embed=embed, view=view)
 
     # Handler for embedding/previewing discord links in messages
