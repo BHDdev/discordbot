@@ -7,7 +7,7 @@ import re
 import os
 
 dotenv.load_dotenv()
-PINUP_ROLL_ID = 1306182463508451339
+PINUP_ROLL_ID = 896578804649173002
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=(), description="Community made BHD discord bot. Licensed under the AGPL.", intents=intents, help_command=None)
