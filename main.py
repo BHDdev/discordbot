@@ -1,6 +1,9 @@
 import discord
 from discord.ext import tasks, commands
+import random
+import requests
 import dotenv
+import re
 import os
 
 dotenv.load_dotenv()
@@ -38,6 +41,36 @@ async def on_reaction_add(reaction: discord.Reaction, user: discord.User):
                 print("Unpinning message")
                 await reaction.message.unpin()
 
+# Cat gifs (very important XD)
+class CatGifView(discord.ui.View):
+    @discord.ui.button(label="Delete", style=discord.ButtonStyle.danger)
+    async def delete_button(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message("Deleting...", ephemeral=True)
+        await interaction.message.delete()
+
+@bot.event
+async def on_message(message: discord.Message):
+    if message.author.bot:
+        return
+    if "cat" in message.content:
+        # 1 in 4 chance to send a cat gif
+        if random.randint(1, 4) == 1:
+            queryurl = "https://g.tenor.com/v1/search?q=cat&key=LIVDSRZULELA&limit=8"
+            result = requests.get(queryurl)
+            data = result.json()
+            gifs = data["results"]
+            gif = random.choice(gifs)
+            view = CatGifView()
+            await message.channel.send(gif["media"][0]["gif"]["url"], view=view)
+    if re.search(r"\b\d{3}\b", message.content):
+        if random.randint(1, 4) == 1:
+            number = re.search(r"\b\d{3}\b", message.content).group()
+            queryurl = f"https://http.cat/{number}"
+            result = requests.get(queryurl)
+            if result.status_code == 200:
+                view = CatGifView()
+                await message.channel.send(queryurl, view=view)
+
 
 # Example slash commands    
 @bot.tree.command(name="ping")
@@ -59,10 +92,71 @@ async def update(interaction: discord.Interaction):
     await interaction.followup.send("Bot updated. Restarting...", ephemeral=True)
     await bot.close()
 
-@bot.tree.command(name="addcontributor")
-@commands.has_permissions(manage_roles=True, ban_members=True)
-async def addcontributor(interaction: discord.Interaction, user: discord.User):
-    # todo call out to github api to add user to contributors
-    await interaction.response.send_message("WIP", ephemeral=True)
+
+# help command
+@bot.tree.command(name="help")
+async def help(interaction: discord.Interaction):
+    view = discord.ui.View()
+    view.add_item(discord.ui.Button(label="GitHub repository", url="https://github.com/BHDdev/discordbot", style=discord.ButtonStyle.link))
+
+    embed = discord.Embed(title="BHD Bot Help", description="Community made BHD discord bot. Licensed under the AGPL.", color=discord.Color.blue())
+    embed.add_field(name="ping", value="Pong!", inline=False)
+    embed.add_field(name="update", value="Update the bot", inline=False)
+    embed.add_field(name="imhelp", value="Info to ims", inline=False)
+    
+    await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
+
+# Im help
+class ImHelpView(discord.ui.View):
+    data = {
+        "Strawberry": {
+            "description": "Strawberry is a popular flavor!",
+            "image": "https://unsplash.it/200/200",
+            "url": "https://example.com"
+        },
+        "Chocolate": {
+            "description": "Chocolate is a classic flavor!",
+            "image": "https://unsplash.it/200/200",
+            "url": "https://example.com"
+        },
+        "Vanilla": {
+            "description": "Vanilla is a simple flavor!",
+            "image": "https://unsplash.it/200/200",
+            "url": "https://example.com"
+        }
+    }
+
+    @discord.ui.select(
+        placeholder = "Choose a Flavor!",
+        min_values = 1,
+        max_values= 3,
+        options = [
+            discord.SelectOption(
+                label="Vanilla",
+                description="Pick this if you like vanilla!"
+            ),
+            discord.SelectOption(
+                label="Chocolate",
+                description="Pick this if you like chocolate!"
+            ),
+            discord.SelectOption(
+                label="Strawberry",
+                description="Pick this if you like strawberry!"
+            )
+        ]
+    )
+    async def select_callback(self, interaction: discord.Interaction, select: discord.ui.select):
+        await interaction.response.send_message(f"Loading selected...", ephemeral=True, delete_after=1)
+        for value in select.values:
+            view = discord.ui.View()
+            view.add_item(discord.ui.Button(label="More", url=self.data[value]["url"], style=discord.ButtonStyle.link))
+            embed = discord.Embed(title=value, color=discord.Color.blue())
+            embed.description = self.data[value]["description"]
+            embed.set_image(url=self.data[value]["image"])
+            await interaction.followup.send(embed=embed, view=view)
+
+@bot.tree.command(name="imhelp")
+async def imhelp(interaction: discord.Interaction):
+    await interaction.response.send_message("Select of which youd like to view information", view=ImHelpView(), ephemeral=True)
 
 bot.run(os.getenv("DISCORD_TOKEN"))
