@@ -125,20 +125,41 @@ async def help(interaction: discord.Interaction):
     await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
 
 # Im help
+def generate_options(chunckIndex: int):
+    options = []
+    for key in implantData:
+        options.append(discord.SelectOption(label=key, description=f"Pick this for more information on {key}"))
+
+    chunckedOptions = []
+    for i in range(0, len(options), 25):
+        chunckedOptions.append(options[i:i+25])
+    return chunckedOptions[chunckIndex]
 class ImHelpView(discord.ui.View):
-    def generate_options():
-        options = []
-        for key in implantData:
-            options.append(discord.SelectOption(label=key, description=f"Pick this for more information on {key}"))
-        return options
-    
     @discord.ui.select(
         placeholder = "Select implants youd like to view",
         min_values = 1,
-        max_values= len(generate_options()),
-        options = generate_options()
+        max_values = len(generate_options(0)),
+        options = generate_options(0)
     )
     async def select_callback(self, interaction: discord.Interaction, select: discord.ui.select):
+        select.disabled = True
+        await interaction.response.send_message(f"Loading selected...", ephemeral=True, delete_after=1)
+        for value in select.values:
+            view = discord.ui.View()
+            view.add_item(discord.ui.Button(label="More", url=implantData[value]["url"], style=discord.ButtonStyle.link))
+            embed = discord.Embed(title=value, color=discord.Color.blurple())
+            embed.description = implantData[value]["description"]
+            embed.set_image(url=implantData[value]["image"])
+            await interaction.followup.send(embed=embed, view=view)
+class ImHelpView1(discord.ui.View): # yes, discord is that stupid and wont allow more than 25 options and yes it has to be defiend beforehand. If someone wants to make it prettier, please. i couldnt find a way.
+    @discord.ui.select(
+        placeholder = "Select implants youd like to view",
+        min_values = 1,
+        max_values = len(generate_options(1)),
+        options = generate_options(1)
+    )
+    async def select_callback(self, interaction: discord.Interaction, select: discord.ui.select):
+        select.disabled = True
         await interaction.response.send_message(f"Loading selected...", ephemeral=True, delete_after=1)
         for value in select.values:
             view = discord.ui.View()
@@ -148,27 +169,27 @@ class ImHelpView(discord.ui.View):
             embed.set_image(url=implantData[value]["image"])
             await interaction.followup.send(embed=embed, view=view)
 
-    # Handler for embedding/previewing discord links in messages
-    @bot.event
-    async def on_message(message: discord.Message):
-        if message.author.bot:
-            return
-        if "discord.com/channels" in message.content:
-            match = re.search(r"discord.com/channels/(\d+)/(\d+)/(\d+)", message.content)
-            message_id = match.group(3)
-            channel_id = match.group(2)
-            channel = bot.get_channel(int(channel_id))
-            if channel:
-                foundmessage = await channel.fetch_message(int(message_id))
-                if foundmessage:
-                    embed = discord.Embed(description=foundmessage.content, color=discord.Color.blurple())
-                    embed.set_author(name=foundmessage.author.name, icon_url=foundmessage.author.avatar)
-                    embed.timestamp = foundmessage.created_at
-                    await message.reply(embed=embed, mention_author=False)
-
-
 @bot.tree.command(name="imhelp")
 async def imhelp(interaction: discord.Interaction):
     await interaction.response.send_message("Select of which youd like to view information", view=ImHelpView(), ephemeral=True)
+    await interaction.followup.send("Select of which youd like to view information", view=ImHelpView1(), ephemeral=True)
+
+# Handler for embedding/previewing discord links in messages
+@bot.event
+async def on_message(message: discord.Message):
+    if message.author.bot:
+        return
+    if "discord.com/channels" in message.content:
+        match = re.search(r"discord.com/channels/(\d+)/(\d+)/(\d+)", message.content)
+        message_id = match.group(3)
+        channel_id = match.group(2)
+        channel = bot.get_channel(int(channel_id))
+        if channel:
+            foundmessage = await channel.fetch_message(int(message_id))
+            if foundmessage:
+                embed = discord.Embed(description=foundmessage.content, color=discord.Color.blurple())
+                embed.set_author(name=foundmessage.author.name, icon_url=foundmessage.author.avatar)
+                embed.timestamp = foundmessage.created_at
+                await message.reply(embed=embed, mention_author=False)
 
 bot.run(os.getenv("DISCORD_TOKEN"))
