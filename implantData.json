@@ -1,4 +1,4 @@
-implantData = {
+{
     "xMagic": {
         "description": "The xMagic has two chips inside, a 13.56MHz ISO14443-A compliant “Magic” Mifare S50 Classic 1k gen1a emulator chip, and a 125kHz T5577 emulator chip. Both chips are encased in a biologically safe 3x15mm cylindrical bioglass tube. The bioglass cylinder is laser sealed and the finished xMagic is tested for function before loading into the injector assembly. Then the injector assembly with xMagic tag inside is placed into a sterilization pouch and sterilized with ethylene oxide (EtO) gas.",
         "image": "https://dangerousthings.com/wp-content/uploads/xMagic-injector-exploded-1080x10801x1-blur-hex-background-416x416.png",

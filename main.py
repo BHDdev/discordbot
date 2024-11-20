@@ -5,10 +5,25 @@ import requests
 import dotenv
 import re
 import os
-from data import implantData
+import json
+import shutil
 
 dotenv.load_dotenv()
-PINUP_ROLL_ID = 896578804649173002
+
+# load config file
+if not os.path.exists("config.json"):
+    # copy example config
+    shutil.copy("config.example.json", "config.json")
+
+with open("config.json", "r") as f:
+    config = json.load(f)
+
+# Constants
+PINUP_ROLL_ID = config["pinup_role_id"]
+
+# load data files
+with open("implantData.json", "r", encoding="utf8") as f:
+    implantData = json.load(f)
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=(), description="Community made BHD discord bot. Licensed under the AGPL.", intents=intents, help_command=None)
@@ -109,6 +124,20 @@ async def update(interaction: discord.Interaction):
     await interaction.followup.send("Bot updated. Restarting...", ephemeral=True)
     await bot.close()
 
+@bot.tree.command(name="downloadconfig")
+@commands.has_permissions(administrator=True)
+async def downloadconfig(interaction: discord.Interaction):
+    await interaction.response.send_message("Downloading config...", ephemeral=True)
+    await interaction.followup.send(file=discord.File("config.json"), ephemeral=True)
+
+@bot.tree.command(name="uploadconfig")
+@commands.has_permissions(administrator=True)
+@discord.app_commands.describe(file = "The config file to upload")
+async def uploadconfig(interaction: discord.Interaction, file: discord.Attachment):
+    await interaction.response.send_message("Uploading config...", ephemeral=True)
+    with open("config.json", "wb") as f:
+        f.write(await file.read())
+    await interaction.followup.send("Config uploaded", ephemeral=True)
 
 # help command
 @bot.tree.command(name="help")
