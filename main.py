@@ -149,6 +149,7 @@ async def help(interaction: discord.Interaction):
     embed.add_field(name="ping", value="Pong!", inline=False)
     embed.add_field(name="update", value="Update the bot", inline=False)
     embed.add_field(name="imhelp", value="Info to ims", inline=False)
+    embed.add_field(name="role", value="Manage roles", inline=False)
     embed.add_field(name="Reaction commands", value="📌 Pin message\n📍 Unpin message\n🔒 Lock thread\n🔓 Unlock thread", inline=False)
     
     await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
