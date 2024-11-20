@@ -1,3 +1,32 @@
 {
-    "pinup_role_id": "896578804649173002"
+    "pinup_role_id": 896578804649173002,
+    "role_management": {
+        "art": {
+            "role_id": 1308881587475054593,
+            "art_manager": {
+                "role_id": 1308881617284108310,
+                "manages": {
+                    "art_helper": {
+                        "role_id": 1308881661777281035
+                    },
+                    "art_guy": {
+                        "role_id": 1308881710779469935
+                    }
+                }
+            }
+        },
+        "tester": {
+            "tester_manager": {
+                "role_id": 1308881844011274294,
+                "manages": {
+                    "testermanager_helper": {
+                        "role_id": 1308881872058847232
+                    },
+                    "testering": {
+                        "role_id": 1308881923527147531
+                    }
+                }
+            }
+        }
+    }
 }
