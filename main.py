@@ -7,16 +7,9 @@ import re
 import os
 import json
 import shutil
+from configman import config
 
 dotenv.load_dotenv()
-
-# load config file
-if not os.path.exists("config.json"):
-    # copy example config
-    shutil.copy("config.example.json", "config.json")
-
-with open("config.json", "r") as f:
-    config = json.load(f)
 
 # Constants
 PINUP_ROLL_ID = int(config["pinup_role_id"])
@@ -32,12 +25,15 @@ bot = commands.Bot(command_prefix=(), description="Community made BHD discord bo
 @bot.event
 async def on_ready():
     print("Bot is ready")
+    for filename in os.listdir("./cogs"):
+        if filename.endswith("py"):
+            await bot.load_extension(f"cogs.{filename[:-3]}")
     try:
         synced = await bot.tree.sync()
         print(f"Synced {len(synced)} commands")
     except Exception as e:
         print(f"Failed to sync commands: {e}")
-    update_OC_rankings.start()
+    #update_OC_rankings.start()
 
 # Thread management commands
 @bot.event
@@ -73,37 +69,6 @@ async def on_member_join(member: discord.Member):
     channel = member.guild.system_channel
     if channel:
         await channel.send(f"Ahh {member.mention}, we have been expecting you...")
-
-# Cat gifs (very important XD)
-class CatGifView(discord.ui.View):
-    @discord.ui.button(label="Delete", style=discord.ButtonStyle.danger)
-    async def delete_button(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message("Deleting...", ephemeral=True, delete_after=2)
-        await interaction.message.delete()
-
-@bot.event
-async def on_message(message: discord.Message):
-    if message.author.bot:
-        return
-    if "cat" in message.content:
-        # 1 in 4 chance to send a cat gif
-        if random.randint(1, 4) == 1:
-            queryurl = "https://g.tenor.com/v1/search?q=cat&key=LIVDSRZULELA&limit=8"
-            result = requests.get(queryurl)
-            data = result.json()
-            gifs = data["results"]
-            gif = random.choice(gifs)
-            view = CatGifView()
-            await message.channel.send(gif["media"][0]["gif"]["url"], view=view)
-    if re.search(r"\b\d{3}\b", message.content):
-        if random.randint(1, 4) == 1:
-            number = re.search(r"\b\d{3}\b", message.content).group()
-            queryurl = f"https://http.cat/{number}"
-            result = requests.get(queryurl)
-            if result.status_code == 200:
-                view = CatGifView()
-                await message.channel.send(queryurl, view=view)
-
 
 # Example slash commands    
 @bot.tree.command(name="ping")
@@ -318,79 +283,5 @@ async def role(interaction: discord.Interaction, role: discord.Role, user: disco
     except Exception as e:
         await interaction.response.send_message(f"An error occurred: {str(e)}", ephemeral=True)
 
-@tasks.loop(hours=1)  
-async def update_OC_rankings():
-    url = 'https://api.opencollective.com/graphql/v2'
-    headers = {'Content-Type': 'application/json'}
-    query = """
-    {
-        "query": "query account($slug:String){account(slug:$slug){name slug transactions(type:CREDIT){totalCount nodes{type fromAccount{name}amount{value}}}}}", 
-        "variables": {"slug": "%s"}
-    }
-    """ % config["oc_slug"]
-    
-    try:
-        response = requests.post(url, headers=headers, data=query)
-        data = response.json()
-        contributors = {}
-
-        # Aggregate contributions 
-        for node in data["data"]["account"]["transactions"]["nodes"]:
-            name = node["fromAccount"]["name"]
-            amount = node["amount"]["value"]  
-            contributors[name] = contributors.get(name, 0) + amount
-
-        # Sort contributors by amount
-        sorted_contributors = sorted(contributors.items(), key=lambda x: x[1], reverse=True)
-        sorted_contributors = sorted_contributors[:5]
-
-        # Get guild
-        for guild in bot.guilds:
-            # Find or create OC category
-            oc_category = discord.utils.get(guild.categories, name="OC contributors")
-            if not oc_category:
-                oc_category = await guild.create_category(
-                    "OC contributors",
-                    position=0, 
-                    overwrites={
-                        guild.default_role: discord.PermissionOverwrite(
-                            send_messages=False,
-                            add_reactions=False
-                        )
-                    }
-                )
-
-            existing_channels = {c.name: c for c in oc_category.channels}
-            new_channels = set()
-
-            # Create/update channels for top contributors
-            for position, (name, amount) in enumerate(sorted_contributors):
-                channel_name = f"{name}-{amount}".lower()
-                channel_name = ''.join(c for c in channel_name if c.isalnum() or c in '-_') + "€"
-                new_channels.add(channel_name)
-
-                channel = existing_channels.get(channel_name)
-                if not channel:
-                    channel = await oc_category.create_text_channel(
-                        channel_name,
-                        position=position,  # Set initial position
-                        overwrites={
-                            guild.default_role: discord.PermissionOverwrite(
-                                send_messages=False,
-                                add_reactions=False
-                            )
-                        }
-                    )
-                else:
-                    # Move existing channel to correct position
-                    await channel.move(position=position, category=oc_category)
-
-            # Remove old contributor channels
-            for old_channel_name in existing_channels.keys() - new_channels:
-                channel = existing_channels[old_channel_name]
-                await channel.delete()
-
-    except Exception as e:
-        print(f"Failed to update OC rankings: {e}")
 
 bot.run(os.getenv("DISCORD_TOKEN"))
