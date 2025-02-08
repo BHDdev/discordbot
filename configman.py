@@ -1,6 +1,14 @@
 import os
 import json
 import shutil
+import logging
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 
 # load config file
 if not os.path.exists("config.json"):
@@ -9,3 +17,6 @@ if not os.path.exists("config.json"):
 
 with open("config.json", "r") as f:
     config = json.load(f)
+
+with open("implantData.json", "r", encoding="utf8") as f:
+    implantData = json.load(f)

@@ -3,6 +3,7 @@ from discord.ext import commands
 import re
 import random
 import aiohttp
+import logging
 
 
 # Cat gifs (very important XD)
@@ -58,3 +59,4 @@ class CatGif(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(CatGif(bot))
+    logging.info("CatGif cog loaded")

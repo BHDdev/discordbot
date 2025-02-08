@@ -1,6 +1,7 @@
 import discord
 from discord.ext import tasks, commands
 from discord import app_commands
+import logging
 
 
 class MoveMessages(commands.Cog):
@@ -14,3 +15,4 @@ class MoveMessages(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(MoveMessages(bot))
+    logging.info("MoveMessages cog loaded")

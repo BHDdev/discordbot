@@ -2,6 +2,7 @@ import discord
 from discord.ext import tasks, commands
 import aiohttp
 from configman import config
+import logging
 
 
 class OCLeaderboard(commands.Cog):
@@ -93,8 +94,10 @@ class OCLeaderboard(commands.Cog):
                     await channel.delete()
 
         except Exception as e:
-            print(f"Failed to update OC rankings: {e}")
+            # print(f"Failed to update OC rankings: {e}")
+            logging.exception(f"Failed to update OC rankings: {e}")
 
 
 async def setup(bot):
     await bot.add_cog(OCLeaderboard(bot))
+    logging.info("OCLeaderboard cog loaded")

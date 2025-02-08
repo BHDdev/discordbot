@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import re
+import logging
 
 
 class LinkPreview(commands.Cog):
@@ -35,3 +36,4 @@ class LinkPreview(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(LinkPreview(bot))
+    logging.info("LinkPreview cog loaded")
