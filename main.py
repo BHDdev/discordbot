@@ -2,13 +2,10 @@ import discord
 from discord.ext import commands
 import dotenv
 import os
-from configman import config
+from configman import init
 import logging
 
 dotenv.load_dotenv()
-
-# Constants
-PINUP_ROLL_ID = int(config["pinup_role_id"])
 
 intents = discord.Intents.all()
 bot = commands.Bot(
@@ -34,47 +31,8 @@ async def on_ready():
         logging.info(f"Synced {len(synced)} commands")
     except Exception as e:
         # print(f"Failed to sync commands: {e}")
-        logging.exception("Failed to sync commands")
-
-
-# Thread management commands
-@bot.event
-async def on_reaction_add(reaction: discord.Reaction, user: discord.User):
-    # print(f"{user} reacted with {reaction.emoji}")
-    logging.debug(f"{user} reacted with {reaction.emoji}")
-    if (
-        reaction.message.channel.type == discord.ChannelType.private_thread
-        or reaction.message.channel.type == discord.ChannelType.public_thread
-    ):
-        if reaction.message.channel.owner == user:
-            # print("User is the owner of the thread")
-            logging.debug(f"User {user} is the owner of the thread")
-            if reaction.emoji == "🔒":
-                # print("Locking thread")
-                logging.info(f"Locking thread {reaction.message.channel.id}")
-                await reaction.message.channel.edit(archived=True)
-            elif reaction.emoji == "🔓":
-                # print("Unlocking thread")
-                logging.info(f"Unlocking thread {reaction.message.channel.id}")
-                await reaction.message.channel.edit(archived=False)
-            elif reaction.emoji == "📌":
-                # print("Pinning message")
-                logging.info(f"Pinning message {reaction.message.id}")
-                await reaction.message.pin()
-            elif reaction.emoji == "📍":
-                # print("Unpinning message")
-                logging.info(f"Unpinning message {reaction.message.id}")
-                await reaction.message.unpin()
-
-    if any(role.id == PINUP_ROLL_ID for role in user.roles):
-        if reaction.emoji == "📌":
-            # print("Pinning message")
-            logging.info(f"Pinning message {reaction.message.id}")
-            await reaction.message.pin()
-        elif reaction.emoji == "📍":
-            # print("Unpinning message")
-            logging.info(f"Unpinning message {reaction.message.id}")
-            await reaction.message.unpin()
+        logging.exception(f"Failed to sync commands: {e}")
+    init()
 
 
 # Welcome message
