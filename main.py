@@ -19,7 +19,6 @@ bot = commands.Bot(
 # Sync commands on ready
 @bot.event
 async def on_ready():
-    # print("Bot is ready")
     logging.info("Bot is ready")
     for filename in os.listdir("./cogs"):
         if filename.endswith("py"):
@@ -27,10 +26,8 @@ async def on_ready():
             await bot.load_extension(f"cogs.{filename[:-3]}")
     try:
         synced = await bot.tree.sync()
-        # print(f"Synced {len(synced)} commands")
         logging.info(f"Synced {len(synced)} commands")
     except Exception as e:
-        # print(f"Failed to sync commands: {e}")
         logging.exception(f"Failed to sync commands: {e}")
     init()
 
@@ -97,7 +94,6 @@ async def help(interaction: discord.Interaction):
         color=discord.Color.blue(),
     )
     embed.add_field(name="ping", value="Pong!", inline=False)
-    embed.add_field(name="update", value="Update the bot", inline=False)
     embed.add_field(name="imhelp", value="Info to ims", inline=False)
     embed.add_field(name="role", value="Manage roles", inline=False)
     embed.add_field(
