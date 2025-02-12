@@ -1,6 +1,13 @@
 {
     "oc_slug": "biohackers-digital",
     "pinup_role_id": 896578804649173002,
+    "purelymail": {
+        "api_token": "key",
+        "domains": [
+            "abc.com",
+            "xyz.com"
+        ]
+    },
     "role_management": {
         "art": {
             "role_id": 1308881587475054593,
