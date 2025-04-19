@@ -1,0 +1,142 @@
+{
+    "xMagic": {
+        "description": "The xMagic has two chips inside, a 13.56MHz ISO14443-A compliant “Magic” Mifare S50 Classic 1k gen1a emulator chip, and a 125kHz T5577 emulator chip. Both chips are encased in a biologically safe 3x15mm cylindrical bioglass tube. The bioglass cylinder is laser sealed and the finished xMagic is tested for function before loading into the injector assembly. Then the injector assembly with xMagic tag inside is placed into a sterilization pouch and sterilized with ethylene oxide (EtO) gas.",
+        "image": "https://dangerousthings.com/wp-content/uploads/xMagic-injector-exploded-1080x10801x1-blur-hex-background-416x416.png",
+        "url": "https://dangerousthings.com/product/xmagic/"
+    },
+    "xSIID": {
+        "description": "The xSIID is a next generation NFC compliant microchip implant which leverages the SIID, an innovative OEM module design from Dsruptive. The module houses both an NTAG I2C NFC chip and an LED indicator tied to the energy harvesting pins of the NTAG I2C. This design ensures the LED does not interfere with operation of the NFC chip and always receives filtered power output regardless of field variance. The xSIID comes in a variety of colors and offers the 1kB (888 bytes) user writable memory. You can store website URLs, contact details, or arbitrary binary data and share that with anyone who scans your xSIID with an NFC enabled smartphone!",
+        "image": "https://dangerousthings.com/wp-content/uploads/promotion_xsiid-colors-416x416.jpg",
+        "url": "https://dangerousthings.com/product/xsiid/"
+    },
+    "xM1": {
+        "description": "The xM1 chip is made with a 13.56MHz ISO14443-A compliant “Classic 1k” emulator chip, which is encased in a biologically safe 3x13mm cylindrical bioglass tube. The bioglass cylinder is laser sealed and the finished xM1 chip is tested for function before loading into the injector assembly, and the whole injector assembly with xM1 chip inside is EO gas sterilized.",
+        "image": "https://dangerousthings.com/wp-content/uploads/xm1-primary-image.jpg",
+        "url": "https://dangerousthings.com/product/xm1/"
+    },
+    "xLED": {
+        "description": "The original xLED was a field testing device that was shaped exactly like an x-series implant to more perfectly emulate how an x-series implant would perform with various readers, but it was not made of implant grade materials and not meant for implantation. The new xLED Implantable Field Detector is manufactured with the same safe materials our x-series implantable transponders are made with, and is designed for implantation. It is the brightest implantable LED device available on the market.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_010010_xLED-Implant-416x416.jpg",
+        "url": "https://dangerousthings.com/product/xled/"
+    },
+    "VivoKey Spark 2": {
+        "description": "The VivoKey Spark is a product designed by VivoKey Technologies, makers of the only cryptobionic implants capable of performing strong cryptographic functions in vivo. The Spark 2 is ISO4443A and NFC Type 4 compliant, readable by all NFC reader devices including all NFC capable smartphones and USB readers that are capable of reading ISO14443A chips.",
+        "image": "https://dangerousthings.com/wp-content/uploads/promo_x-series-quarter-euro-transponder-416x416.png",
+        "url": "https://dangerousthings.com/product/vivokey-spark/"
+    },
+    "xHT": {
+        "description": "The xHT RFID chip implant is a 125kHz ISO14223 compliant transponder. It is also fully compliant to ISO 11784/85 Animal ID and ISO 18000-2 AIDC RFID management standards. It also supports a 48 bit secret key based challenge / response authentication mechanism.",
+        "image": "https://dangerousthings.com/wp-content/uploads/promo_x-series-2mm-tag-416x416.png",
+        "url": "https://dangerousthings.com/product/xht/"
+    },
+    "xSLX": {
+        "description": "he xSLX NFC chip implant is an ISO15693 NFC Type 5 compliant transponder. It works with NFC enabled smartphones, certain commercial access control systems, various ISO15693 compatible door locks, gun safes, and padlocks, as well as USB contactless ISO15693 readers.",
+        "image": "https://dangerousthings.com/wp-content/uploads/promo_x-series-quarter-euro-transponder-416x416.png",
+        "url": "https://dangerousthings.com/product/xslx/"
+    },
+    "xDF2": {
+        "description": "The xDF2 NFC chip implant is an ISO14443A NFC Type 4 compliant transponder. It works with NFC enabled smartphones, certain commercial access control systems, various ISO14443A compatible door locks, as well as USB contactless ISO14443A readers. The DESFire EV2 is a very powerful chip, capable of doing much more than simply holding NDEF record data for simple NFC applications. The true utility of this chip is best utilized by programmers and engineers, but there’s also nothing wrong with storing a lot of NDEF data on it either. The xDF2 has enough space you could store a vCard digital business card complete with all your contact information and even a small photo of yourself on this chip with space to spare!",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_85129400727-xDF2-holding-416x416.jpg",
+        "url": "https://dangerousthings.com/product/xdf2/"
+    },
+    "NExT": {
+        "description": "Maximize hand real estate with the NExT dual frequency chip implant! If you want the benefit of having both a high frequency NFC chip implant and a low frequency RFID chip implant, then the NExT is what you need! The NFC side of the NExT is an NTAG216 chip that works with 13.56MHz NFC capable smartphones, certain ISO14443A commercial access control systems, certain door locks, and USB contactless ISO14443A readers. The low frequency RFID side of the NExT is a 125kHz T5577 emulator chip that can behave like many different common low frequency chip types, including EM41xx, EM4200, HID 1326 ProxCard II, HID 1346 ProxCard III, and Indala access cards and keyfobs. Check out our video explaining how the T5577 works.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_851294007264_NExT-xNTxEM-416x416.jpg",
+        "url": "https://dangerousthings.com/product/next/"
+    },
+    "xNT": {
+        "description": "NTAG216 13.56MHz ISO14443A & NFC Type 2 chip. The xNT NFC chip implant was designed by Dangerous Things and production of it was originally crowdfunded via an Indiegogo campaign in 2013. It works with NFC enabled smartphones, certain commercial access control systems, and USB contactless ISO14443A readers.",
+        "image": "https://dangerousthings.com/wp-content/uploads/promo_x-series-2mm-tag-416x416.png",
+        "url": "https://dangerousthings.com/product/xnt/"
+    },
+    "xEM": {
+        "description": "The xEM implant contains a 125kHz T5577 RFID chip emulator that can behave like many different common low frequency chip types, including EM41xx, EM4200, HID 1326 ProxCard II, HID 1346 ProxCard III, Indala, Pyramid, Viking, AMV, Presco (and more) access cards and keyfobs. The xEM is a great introductory chip for people just getting into RFID projects. It is compatible with many inexpensive OEM and commercial low frequency RFID readers and stand-alone access controllers like our xEM Access Controller. Check out our video explaining how the T5577 works.",
+        "image": "https://dangerousthings.com/wp-content/uploads/promo_x-series-2mm-tag-416x416.png",
+        "url": "https://dangerousthings.com/product/xem/"
+    },
+    "xBT": {
+        "description": "The xBT kit contains the xBT chip and all the sterile procedure materials required to perform installation. The xBT chip is made with 134kHz FDX-B compliant Bio-Thermo LifeChip, which is encased in biologically safe 2.4×14.5mm cylindrical borosilicate bioglass tube and shipped in a sterilized injection assembly. The xBT reports a simple ID number which works with any FDX-B reader, and can also transmit temperature sensor data to a compatible Bio-Thermo reader.",
+        "image": "https://dangerousthings.com/wp-content/uploads/promo_arm-pit-large.png",
+        "url": "https://dangerousthings.com/product/xbt/"
+    },
+    "flexM1 V2": {
+        "description": "Basically, for many years the MF1ICS50 1k chip was used for all kinds of applications as a “secure chip” for everything from access control to stored value cards, and used for making localized payments within closed systems like public transit and laundry services. However, its security mechanism called “crypto1” is a simple, proprietary encryption mechanism that hardly has anything to do with modern cryptography. It has been broken for many years now, but the sheer number of systems out there that still use it means the S50 1k chip will continue to be used by legacy systems around the world for years to come. So now, you can crack the security on those cards and clone their content (including the 4 byte non-unique ID or NUID “serial number”) to your flexM1!",
+        "image": "https://dangerousthings.com/wp-content/uploads/flexm1_v2_with_lego-1-416x416.png",
+        "url": "https://dangerousthings.com/product/flexm1-v2/"
+    },
+    "flexUG4": {
+        "description": "The flexUG4 is an Ultimate Magic gen4 chip emulator. It can emulate a variety of different NFC chips and has writable Sector 0, also known as the “manufacturer block.”",
+        "image": "https://dangerousthings.com/wp-content/uploads/flexug4-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexug4/"
+    },
+    "flexSecure": {
+        "description": "The flexSecure is a subdermal contactless secure element enabling fully autonomous separation of your cryptographic keys and functions from vulnerable general computing platforms such as your smartphone or computer. The ability to not only carry your OTP, PGP, and other cryptographic keys with you at all times, but also perform cryptographic functions in vivo (generate OTP codes, encrypt & decrypt data, etc.) without ever revealing private keys to the NFC interface you are interacting with is a huge step forward for personal digital identity and data security.",
+        "image": "https://dangerousthings.com/wp-content/uploads/flexSecure-in-pouch_1920x1920-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexsecure/"
+    },
+    "flexClass": {
+        "description": "The flexClass is subdermal flex implant, conceived of and designed by community member @leumas95, is fully encapsulated in our custom biopolymer. It contains a 13.56MHz high frequency programmable HID standard (legacy) iClass transponder chip that allows you to *enroll it with your HID access system, or use our Proxmark3 RFID research tool to clone / copy an HID iClass credential to it.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_10290_flexClass-chip-side-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexclass/"
+    },
+    "VivoKey Apex Flex": {
+        "description": "The Apex Flex is a patent pending subdermal security key from VivoKey Technologies enabling always available, fully autonomous separation of cryptographic functions from vulnerable general computing platforms such as your smartphone or computer. The ability to carry your OTP authenticator, PGP, and other cryptographic keys, and perform cryptographic functions all in vivo (generate OTP codes, encrypt & decrypt data, etc.) without ever revealing private keys to the NFC interface you are interacting with is a huge step forward for personal digital identity and data security.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product-apex-flex-in-hand-416x416.jpg",
+        "url": "https://dangerousthings.com/product/apex-flex/"
+    },
+    "flexMN": {
+        "description": "The flexMN is a flex combination of a Magic NTAG chip and the T5577 chip. The Magic NTAG is a new kind of NFC chip emulator that is capable of emulating a huge number of NFC chip types in the Ultralight and NTAG family of tags. Now you can fully program the ID (serial number) and application memory in both ISO14443A and 125kHz chips a single implantable device with excellent performance and optional blinky lights too!",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_10270_flexMN-in-hand-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexmn/"
+    },
+    "flexMT": {
+        "description": "The flexMT is a jumbo size flex combination of our easily injectable 3mm diameter xM1 magic 1k and our 2mm injectable xEM T5577 chips. Now you can fully program the ID (serial number) and application memory in both ISO14443A and 125kHz chips a single implantable device with excellent performance and blinky lights too!",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_010240_flexMT-on-reader-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexmt/"
+    },
+    "flexNExT": {
+        "description": "The flexNExT is a jumbo size flex version of our easily injectable 2mm diameter NExT dual frequency chip implant. It has the same NTAG216 and T5577 chips inside, only super sized to drastically improve performance… and we can put some blinky lights on too.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_010231_flexNExT-blinky-on-hand-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexnext/"
+    },
+    "flexEM": {
+        "description": "The flexEM is one of our next generation, high performance, 125kHz RFID transponders with a T5577 chip inside. The T5577 is an emulator that can behave like many different common low frequency chip types, including EM41xx, EM4200, HID 1326 ProxCard II, HID 1346 ProxCard III, Indala, Pyramid, Viking, AMV, Presco (and more) access cards and keyfobs. It is compatible with many inexpensive but plentiful OEM and commercial low frequency RFID readers and stand-alone access controllers like our xEM Access Controller.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_85129400744_flexem-coins-416x408.jpg",
+        "url": "https://dangerousthings.com/product/flexem/"
+    },
+    "flexDF2": {
+        "description": "The flexDF2 is one of our next generation, high performance, RFID and NFC compliant transponders. The flexDF2 is coated in USP Class VI, ISO 10993 tested biopolymer which gives it an extremely thin profile and semi-flexible structure suitable for installation just about anywhere. The DESFire EV2 8kB NFC Type 4 multi-application chip inside the flexDF2 allows large, cryptographically secured data storage. They are shipped in small sealed plastic tubes with chlorhexidine solution.",
+        "image": "https://dangerousthings.com/wp-content/uploads/new-flex-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexdf2/"
+    },
+    "TeslaFlex": {
+        "description": "The TeslaFlex was an exercise in converting Tesla Model 3 key cards into flex implants. The origin of the TeslaFlex was a VivoKey Special Project in concert Amie DD. This worked well, but it meant the only thing the TeslaFlex could do was open your Model 3. That’s not really great, so we worked to reverse-engineer the Tesla keycard Java applet that runs on the card and publish that as a VivoKey Apex compatible applet on Fidesmo called “Not A Keycard”",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_010009_teslaflex-416x416.jpg",
+        "url": "https://dangerousthings.com/product/teslaflex/"
+    },
+    "flexM1": {
+        "description": "Basically, for many years the MF1ICS50 1k chip was used for all kinds of applications as a “secure chip” for everything from access control to stored value cards, and used for making localized payments within closed systems like public transit and laundry services. However, its security mechanism called “crypto1” is a simple, proprietary encryption mechanism that hardly has anything to do with modern cryptography. It has been broken for many years now, but the sheer number of systems out there that still use it means the S50 1k chip will continue to be used by legacy systems around the world for years to come. So now, you can crack the security on those cards and clone their content (including the 4 byte non-unique ID or NUID “serial number”) to your flexM1!",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_010188_flexm1-lego-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexm1/"
+    },
+    "flexNT": {
+        "description": "The flexNT is one of our next generation, high performance, RFID and NFC compliant transponders. It is coated in USP Class VI, ISO 10993 tested biopolymer which gives it an extremely thin profile and flexible structure suitable for installation just about anywhere. The flexNT has the same NTAG216 based NFC chip as our injectable xNT chip implant, however the flexNT offers many times the readability, range, and performance of the xNT.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_85129400715_flexNT-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexnt/"
+    },
+    "flexDF": {
+        "description": "The flexDF is one of our next generation, high performance, RFID and NFC compliant transponders. The flexDF is coated in USP Class VI, ISO 10993 tested biopolymer which gives it an extremely thin profile and semi-flexible structure suitable for installation just about anywhere. The DESFire EV1 8kB NFC Type 4 multi-application chip inside the flexDF allows large, cryptographically secured data storage. They are shipped in small sealed plastic tubes with chlorhexidine solution.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_85129400716_flexDF-being-held-in-hand-square-416x416.jpg",
+        "url": "https://dangerousthings.com/product/flexdf/"
+    },
+    "Titan": {
+        "description": "The magnetic component of the Titan is a 3mm diameter and 2mm thick NdFeB sintered disc with no coating (no nickel or gold, just pure magnet). That magnetic core is encased inside machined titanium, creating a disc measuring 4.5mm in diameter and 2.8mm thick. The top and bottom surfaces have a thickness that is limited to 0.4mm thick to encourage better lifting strength, even though the design is meant for sensing with high field strength and low mass for minimal inertia. The field strength of the magnetic core is N52 and Gauss measurements taken from the fully encased Titan average 2.9kG (2900G) at the top and bottom.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_10225-titan-image-416x416.jpg",
+        "url": "https://dangerousthings.com/product/titan/"
+    },
+    "xG3": {
+        "description": "First we solved the lifespan and robustness problems other encapsulation techniques have (silicone, parylene, etc.) by using our tried and true Schott 8625 bioglass. Our magnetic core is secured with biocompatible resin inside a laser sealed bioglass encapsulate. Second it is the only injectable biomagnet in the world that comes pre-loaded in an injection assembly. Other magnetic implants on the market require scalpels and dermal elevators to install, and sutures to close after placement. The xG3 is a simple injection! Third it is the only biomagnet in the world that is put through a clinically sterile EO gas process! The xG3 has been designed from the ground up for direct and permanent in vivo use. Using 3 special processes – a specialized magnet production process, a precisely controlled glass encapsulation process, and a customized EO gas sterilization process, we are able to make the xG3 biomagnet with the same safe Schott 8625 bioglass coating the rest of our x-series implants use, and sterilize them, all without impacting the magnetic field strength.",
+        "image": "https://dangerousthings.com/wp-content/uploads/product_xg3-diametric-416x416.png",
+        "url": "https://dangerousthings.com/product/xg3/"
+    }
+}
