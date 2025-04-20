@@ -103,6 +103,11 @@ async def help(interaction: discord.Interaction):
         value="📌 Pin message\n📍 Unpin message\n🔒 Lock thread\n🔓 Unlock thread",
         inline=False,
     )
+    embed.add_field(
+        name="Vote pinning",
+        value="5 📌 will get a message pinned.\nIf the message collects 5 more 📍 than 📌 , then its unpinned again.\nIf the message contains !NP! it isnt affected.",
+        inline=False,
+    )
 
     await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
 
