@@ -75,7 +75,7 @@
         "url": "https://dangerousthings.com/product/flexsecure/"
     },
     "flexClass": {
-        "description": "The flexClass is subdermal flex implant, conceived of and designed by community member @leumas95, is fully encapsulated in our custom biopolymer. It contains a 13.56MHz high frequency programmable HID standard (legacy) iClass transponder chip that allows you to *enroll it with your HID access system, or use our Proxmark3 RFID research tool to clone / copy an HID iClass credential to it.",
+        "description": "The flexClass is subdermal flex implant, conceived of and designed by community member @miana, is fully encapsulated in our custom biopolymer. It contains a 13.56MHz high frequency programmable HID standard (legacy) iClass transponder chip that allows you to *enroll it with your HID access system, or use our Proxmark3 RFID research tool to clone / copy an HID iClass credential to it.",
         "image": "https://dangerousthings.com/wp-content/uploads/product_10290_flexClass-chip-side-416x416.jpg",
         "url": "https://dangerousthings.com/product/flexclass/"
     },
