@@ -49,9 +49,7 @@ async def ping(interaction: discord.Interaction):
 
 # System management commands
 @bot.tree.command(name="update")
-@app_commands.checks.has_permissions(
-    administrator=True, manage_messages=True, manage_roles=True
-)
+@app_commands.checks.has_permissions(administrator=True)
 async def update(interaction: discord.Interaction):
     await interaction.response.send_message("Updating bot...", ephemeral=True)
     os.system(
