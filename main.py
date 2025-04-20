@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord import app_commands
 import dotenv
 import os
-from configman import init
+from configman import init, config
 import logging
 
 dotenv.load_dotenv()
@@ -35,10 +35,12 @@ async def on_ready():
 
 # Welcome message
 @bot.event
-async def on_member_join(member: discord.Member):
-    channel = member.guild.system_channel
-    if channel:
-        await channel.send(f"Ahh {member.mention}, we have been expecting you...")
+async def on_member_update(before: discord.Member, after: discord.Member):
+    # Check if the member has completed onboarding
+    if after.flags.completed_onboarding and not before.flags.completed_onboarding:
+        channel = bot.get_channel(config["welcome_message"]["channel_id"])
+        if channel:
+            await channel.send(config["welcome_message"]["message"] % after.mention)
 
 
 # Example slash commands
