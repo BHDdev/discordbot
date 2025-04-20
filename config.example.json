@@ -8,6 +8,10 @@
             "xyz.com"
         ]
     },
+    "welcome_message": {
+        "channel_id": 682798225182425095,
+        "message": "Ahh %s, we have been expecting you..."
+    },
     "role_management": {
         "art": {
             "role_id": 1308881587475054593,
