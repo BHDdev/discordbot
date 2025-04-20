@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 import dotenv
 import os
 from configman import init
@@ -48,7 +49,7 @@ async def ping(interaction: discord.Interaction):
 
 # System management commands
 @bot.tree.command(name="update")
-@commands.has_permissions(administrator=True)
+@app_commands.checks.has_permissions(administrator=True)
 async def update(interaction: discord.Interaction):
     await interaction.response.send_message("Updating bot...", ephemeral=True)
     os.system(
@@ -60,15 +61,14 @@ async def update(interaction: discord.Interaction):
 
 
 @bot.tree.command(name="downloadconfig")
-@commands.has_permissions(administrator=True)
+@app_commands.checks.has_permissions(administrator=True)
 async def downloadconfig(interaction: discord.Interaction):
     await interaction.response.send_message("Downloading config...", ephemeral=True)
     await interaction.followup.send(file=discord.File("config.json"), ephemeral=True)
 
 
 @bot.tree.command(name="uploadconfig")
-@commands.has_permissions(administrator=True)
-@discord.app_commands.describe(file="The config file to upload")
+@app_commands.checks.has_permissions(administrator=True)
 async def uploadconfig(interaction: discord.Interaction, file: discord.Attachment):
     await interaction.response.send_message("Uploading config...", ephemeral=True)
     with open("config.json", "wb") as f:
@@ -103,6 +103,19 @@ async def help(interaction: discord.Interaction):
     )
 
     await interaction.response.send_message(embed=embed, ephemeral=True, view=view)
+
+
+# Error handling
+@bot.tree.error
+async def on_app_command_error(
+    interaction: discord.Interaction, error: app_commands.AppCommandError
+):
+    if isinstance(error, app_commands.errors.MissingPermissions):
+        await interaction.response.send_message(
+            "You don't have permission to use this command.", ephemeral=True
+        )
+    else:
+        logging.error(f"Command error: {error}")
 
 
 bot.run(os.getenv("DISCORD_TOKEN"))
