@@ -27,8 +27,8 @@ class CatGif(commands.Cog):
         if message.author.bot:
             return
         if "cat" in message.content:
-            # 1 in 4 chance to send a cat gif
-            if random.randint(1, 4) == 1:
+            # 1 in 20 chance to send a cat gif
+            if random.randint(1, 20) == 1:
                 queryurl = (
                     "https://g.tenor.com/v1/search?q=cat&key=LIVDSRZULELA&limit=8"
                 )
