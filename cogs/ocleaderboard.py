@@ -56,7 +56,10 @@ class OCLeaderboard(commands.Cog):
                         position=0,
                         overwrites={
                             guild.default_role: discord.PermissionOverwrite(
-                                send_messages=False, add_reactions=False
+                                send_messages=False,
+                                add_reactions=False,
+                                connect=False,
+                                speak=False,
                             )
                         },
                     )
@@ -75,23 +78,36 @@ class OCLeaderboard(commands.Cog):
 
                     channel = existing_channels.get(channel_name)
                     if not channel:
-                        channel = await oc_category.create_text_channel(
+                        channel = await oc_category.create_voice_channel(
                             channel_name,
                             position=position,  # Set initial position
                             overwrites={
                                 guild.default_role: discord.PermissionOverwrite(
-                                    send_messages=False, add_reactions=False
+                                    send_messages=False,
+                                    add_reactions=False,
+                                    connect=False,
+                                    speak=False,
                                 )
                             },
                         )
                     else:
-                        # Move existing channel to correct position
-                        await channel.move(position=position, category=oc_category)
+                        # Move existing channel to correct position if it's a voice channel
+                        if isinstance(channel, discord.VoiceChannel):
+                            try:
+                                await channel.move(
+                                    position=position, category=oc_category
+                                )
+                            except ValueError:
+                                # If move fails, log the issue
+                                logging.warning(
+                                    f"Could not move channel {channel.name} to position {position}"
+                                )
 
                 # Remove old contributor channels
                 for old_channel_name in existing_channels.keys() - new_channels:
                     channel = existing_channels[old_channel_name]
-                    await channel.delete()
+                    if isinstance(channel, discord.VoiceChannel):
+                        await channel.delete()
 
         except Exception as e:
             # print(f"Failed to update OC rankings: {e}")
