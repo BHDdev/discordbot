@@ -71,7 +71,11 @@ class OCLeaderboard(commands.Cog):
                 for position, (name, amount) in enumerate(sorted_contributors):
                     channel_name = f"{name}-{amount}".lower()
                     channel_name = (
-                        "".join(c for c in channel_name if c.isalnum() or c in "-_")
+                        "".join(
+                            c
+                            for c in channel_name
+                            if c.isalnum() or c in "-_." or c == "."
+                        )
                         + "€"
                     )
                     new_channels.add(channel_name)
