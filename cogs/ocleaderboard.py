@@ -98,13 +98,34 @@ class OCLeaderboard(commands.Cog):
                         # Move existing channel to correct position if it's a voice channel
                         if isinstance(channel, discord.VoiceChannel):
                             try:
-                                await channel.move(
-                                    position=position, category=oc_category
+                                # Get only voice channels for proper positioning
+                                voice_channels = [
+                                    c
+                                    for c in oc_category.channels
+                                    if isinstance(c, discord.VoiceChannel)
+                                ]
+
+                                # Sort the voice channels by their existing positions
+                                sorted_voice_channels = sorted(
+                                    voice_channels, key=lambda c: c.position
                                 )
-                            except ValueError:
-                                # If move fails, log the issue
+
+                                # Find the position where this channel should be among voice channels only
+                                target_position = position
+
+                                # If we have enough channels to set a proper position
+                                if sorted_voice_channels:
+                                    # Get the actual Discord position of the first voice channel
+                                    base_position = min(
+                                        c.position for c in sorted_voice_channels
+                                    )
+                                    # Calculate proper target position relative to first voice channel
+                                    target_position = base_position + position
+
+                                await channel.edit(position=target_position)
+                            except Exception as e:
                                 logging.warning(
-                                    f"Could not move channel {channel.name} to position {position}"
+                                    f"Could not move channel {channel.name}: {str(e)}"
                                 )
 
                 # Remove old contributor channels
