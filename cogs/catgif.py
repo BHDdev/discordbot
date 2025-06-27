@@ -27,8 +27,8 @@ class CatGif(commands.Cog):
         if message.author.bot:
             return
         if "cat" in message.content:
-            # 1 in 20 chance to send a cat gif
-            if random.randint(1, 20) == 1:
+            # 1 in 50 chance to send a cat gif
+            if random.randint(1, 50) == 1:
                 queryurl = (
                     "https://g.tenor.com/v1/search?q=cat&key=LIVDSRZULELA&limit=800"
                 )
@@ -42,7 +42,7 @@ class CatGif(commands.Cog):
                 view = CatGifView()
                 await message.channel.send(gif["media"][0]["gif"]["url"], view=view)
         if re.search(r"\b\d{3}\b", message.content):
-            if random.randint(1, 20) == 1:
+            if random.randint(1, 50) == 1:
                 number = re.search(r"\b\d{3}\b", message.content).group()
                 queryurl = f"https://http.cat/{number}"
                 async with aiohttp.ClientSession() as session:
