@@ -85,14 +85,6 @@ class OCLeaderboard(commands.Cog):
                         channel = await oc_category.create_voice_channel(
                             channel_name,
                             position=position,  # Set initial position
-                            overwrites={
-                                guild.default_role: discord.PermissionOverwrite(
-                                    send_messages=False,
-                                    add_reactions=False,
-                                    connect=False,
-                                    speak=False,
-                                )
-                            },
                         )
                     else:
                         # Move existing channel to correct position if it's a voice channel
