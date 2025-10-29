@@ -1,6 +1,8 @@
 {
     "oc_slug": "biohackers-digital",
     "pinup_role_id": 896578804649173002,
+    "embedder_endpoint": "https://example.com",
+    "embedder_token": "secret_token",
     "purelymail": {
         "api_token": "key",
         "domains": [
